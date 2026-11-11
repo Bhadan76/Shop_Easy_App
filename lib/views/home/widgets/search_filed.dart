@@ -24,11 +24,11 @@ class SearchFieldWidget extends StatelessWidget {
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.04),
             blurRadius: 3,
-            offset: const Offset(0, 2),
+            offset: Offset(0, 2),
           ),
         ],
       ),
-      child: const TextField(
+      child: TextField(
        textAlign: TextAlign.start,
         decoration: InputDecoration(
           hintText: 'Search for products...',

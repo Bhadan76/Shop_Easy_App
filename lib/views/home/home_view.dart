@@ -17,7 +17,6 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,23 +34,21 @@ class _HomeViewState extends State<HomeView> {
               SizedBox(height: 12),
               _buildCategorySection(),
               _popularProductsHeader(),
-              SizedBox(height: 12,),
+              SizedBox(height: 12),
               GridView.builder(
                 shrinkWrap: true,
-                physics:  NeverScrollableScrollPhysics(),
+                physics: NeverScrollableScrollPhysics(),
                 itemCount: 4,
-                gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  crossAxisSpacing: 12,
-                  mainAxisSpacing: 12,
-                  childAspectRatio: 1.35,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                  childAspectRatio: 1.62,
                 ),
                 itemBuilder: (context, index) {
-                  return  ProductCard();
+                  return ProductCard();
                 },
-              )
-
-
+              ),
             ],
           ),
         ),
@@ -63,7 +60,7 @@ class _HomeViewState extends State<HomeView> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-         Text(
+        Text(
           'Popular Products',
           style: TextStyle(
             fontSize: 22,
@@ -72,9 +69,7 @@ class _HomeViewState extends State<HomeView> {
           ),
         ),
         GestureDetector(
-          onTap: () {
-
-          },
+          onTap: () {},
           child: Row(
             children: [
               Text(
@@ -86,11 +81,7 @@ class _HomeViewState extends State<HomeView> {
                 ),
               ),
               SizedBox(width: 4),
-              Icon(
-                Icons.arrow_forward_ios,
-                size: 15,
-                color: AppColors.primary,
-              ),
+              Icon(Icons.arrow_forward_ios, size: 15, color: AppColors.primary),
             ],
           ),
         ),
@@ -100,16 +91,16 @@ class _HomeViewState extends State<HomeView> {
 
   Widget _buildCategorySection() {
     return SizedBox(
-              height: 120,
-              child: ListView.separated(
-                itemCount: 12,
-                scrollDirection: Axis.horizontal,
-                separatorBuilder: (context, index) => SizedBox(width: 8),
-                itemBuilder: (context, index) {
-                  return CategoryItem();
-                },
-              ),
-            );
+      height: 120,
+      child: ListView.separated(
+        itemCount: 12,
+        scrollDirection: Axis.horizontal,
+        separatorBuilder: (context, index) => SizedBox(width: 8),
+        itemBuilder: (context, index) {
+          return CategoryItem();
+        },
+      ),
+    );
   }
 
   AppBar _buildAppBar() {
@@ -118,7 +109,7 @@ class _HomeViewState extends State<HomeView> {
         'Shop Easy',
         style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
       ),
-      actions:  [
+      actions: [
         Padding(
           padding: EdgeInsets.only(right: 12.0),
           child: CircleAvatar(
@@ -132,6 +123,3 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 }
-
-
-

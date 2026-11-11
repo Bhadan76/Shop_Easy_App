@@ -16,7 +16,7 @@ class SelectionHeader extends StatelessWidget {
       children: [
         Text(
           name,
-          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
+          style:TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
         ),
       ],
     );

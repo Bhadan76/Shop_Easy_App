@@ -6,104 +6,136 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Row(
-        children: [
-          // Product Image
-          Container(
-            width: 80,
-            height: 100,
-            decoration: BoxDecoration(
-              color: AppColors.primary,
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(15),
-              child: Image.network(
-                'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300',
-                fit: BoxFit.contain,
-              ),
-            ),
+    return Container(
+      padding: EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        color: AppColors.background,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: AppColors.border,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.04),
+            blurRadius: 10,
+            offset: Offset(0, 4),
           ),
-
-          SizedBox(width: 6),
-
-          // Product Details
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Align(
-                    alignment: Alignment.topRight,
-                    child: Icon(
-                      Icons.favorite_border,
-                      size: 20,
-                      color: Colors.black87,
-                    ),
+        ],
+      ),
+      child: Stack(
+        children: [
+          Row(
+            children: [
+              Container(
+                width: 75,
+                height: 88,
+                decoration: BoxDecoration(
+                  color: AppColors.primary,
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(14),
+                  child: Image.network(
+                    'https://www.freepik.com/free-photos-vectors/smart-watch-png',
+                    fit: BoxFit.contain,
+                    errorBuilder: (context, error, stackTrace) {
+                      return  Center(
+                        child: Icon(
+                          Icons.image_not_supported_outlined,
+                          size: 28,
+                          color: Colors.grey,
+                        ),
+                      );
+                    },
                   ),
                 ),
-
-                // Product Name
-                Text(
-                  'Smart Watch Pro',
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.textPrimary,
-                  ),
-                ),
-
-                // Product Price
-                Wrap(
-                  spacing: 4,
-                  crossAxisAlignment: WrapCrossAlignment.center,
-                  children: [
-                     Text(
-                      '৳2,999',
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.primary,
+              ),
+              SizedBox(width: 8),
+              Expanded(
+                child: Padding(
+                  padding:EdgeInsets.only(right: 18.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              'Smart Watch',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.textPrimary,
+                                letterSpacing: 0,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                    Text(
-                      '৳4,999',
-                      style: TextStyle(
-                        fontSize: 11,
-                        color: Colors.grey.shade600,
-                        decoration: TextDecoration.lineThrough,
+                      SizedBox(height: 2),
+                      Row(
+                        children: [
+                          Text(
+                            '₹2000',
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w800,
+                              color: AppColors.primary,
+                              letterSpacing: 0,
+                            ),
+                          ),
+                          SizedBox(width: 6),
+                          Text(
+                            '₹2500',
+                            style: TextStyle(
+                              fontSize: 8,
+                              color: Colors.grey,
+                              decoration: TextDecoration.lineThrough,
+                              letterSpacing: 0,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
-                ),
-
-                // Discount Badge
-                Container(
-                  height: 20,
-                  width: 60,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 7,
-                    vertical: 3,
-                  ),
-                  decoration: BoxDecoration(
-                    color: AppColors.productOfferButton,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child:  Text(
-                    '40% OFF',
-                    style: TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.productOffer,
-                    ),
+                       SizedBox(height: 2),
+                      Container(
+                        padding:EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 3,
+                        ),
+                        decoration: BoxDecoration(
+                          color: AppColors.productOfferButton,
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: Text(
+                          '20% OFF',
+                          style: TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.productOffer,
+                            letterSpacing: 0,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
+              ),
+            ],
+          ),
+          Positioned(
+            top: 0,
+            right: 0,
+            child: GestureDetector(
+              onTap: () {},
+              child: Icon(
+                Icons.favorite_border_rounded,
+                size: 18,
+                color: AppColors.textPrimary,
+              ),
             ),
           ),
         ],

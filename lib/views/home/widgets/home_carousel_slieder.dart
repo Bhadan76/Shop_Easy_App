@@ -1,7 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:shop_easy/views/home/widgets/selection_button.dart';
-
 import '../../../app/app_colors.dart';
 
 class HomeCarouselSlieder extends StatefulWidget {
@@ -13,30 +11,30 @@ class HomeCarouselSlieder extends StatefulWidget {
 
 class _HomeCarouselSliederState extends State<HomeCarouselSlieder> {
   int _currentIndex = 0;
-  static  final List<Map<String, dynamic>> _bannerList = [
+  static final List<Map<String, dynamic>> _bannerList = [
     {
       'title': 'Big Summer Sale',
       'offer': 'Up to 50% OFF',
       'description': 'On Fashion, Electronics & More',
       'colors': [AppColors.primary, AppColors.slider],
-      'image': ''
-
+      'image':
+          'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400',
     },
     {
-      'title': 'Big Summer Sale',
-      'offer': 'Up to 50% OFF',
-      'description': 'On Fashion, Electronics & More',
+      'title': 'Super Discounts',
+      'offer': 'Up to 60% OFF',
+      'description': 'On Electronics, Shoes & More',
       'colors': [AppColors.primary, AppColors.slider],
-      'image': ''
-
+      'image':
+          'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=400',
     },
     {
-      'title': 'Big Summer Sale',
-      'offer': 'Up to 50% OFF',
-      'description': 'On Fashion, Electronics & More',
+      'title': 'Mega Festival',
+      'offer': 'Up to 70% OFF',
+      'description': 'On Top Brands & Accessories',
       'colors': [AppColors.primary, AppColors.slider],
-      'image': ''
-
+      'image':
+          'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400',
     },
   ];
 
@@ -49,7 +47,7 @@ class _HomeCarouselSliederState extends State<HomeCarouselSlieder> {
             height: 170,
             autoPlay: true,
             viewportFraction: 1.0,
-            autoPlayInterval: const Duration(seconds: 4),
+            autoPlayInterval:  Duration(seconds: 4),
             onPageChanged: (index, reason) {
               setState(() {
                 _currentIndex = index;
@@ -59,90 +57,131 @@ class _HomeCarouselSliederState extends State<HomeCarouselSlieder> {
           items: _bannerList.map((banner) {
             return Builder(
               builder: (BuildContext context) {
-                return Container(
-                  width: double.infinity,
-                  margin: EdgeInsets.symmetric(horizontal: 4.0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16.0),
-                    gradient: LinearGradient(
-                      colors: banner['colors'],
-                      begin: Alignment.centerLeft,
-                      end: Alignment.bottomRight,
+                return ClipRRect(
+                  borderRadius: BorderRadius.circular(16.0),
+                  child: Container(
+                    width: double.infinity,
+                    margin: EdgeInsets.symmetric(horizontal: 4.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16.0),
+                      gradient: LinearGradient(
+                        colors: banner['colors'],
+                        begin: Alignment.centerLeft,
+                        end: Alignment.bottomRight,
+                      ),
                     ),
-                  ),
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        right: -10,
-                        bottom: -10,
-                        child: Icon(
-                          banner['icon'],
-                          size: 120,
-                          color: Colors.white.withValues(alpha: 0.15),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(16.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              banner['title'] as String,
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
+                    child: Stack(
+                      children: [
+                        Positioned(
+                          right: 0,
+                          bottom: 0,
+                          top: 0,
+                          width: 160,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.horizontal(
+                              right: Radius.circular(16.0),
                             ),
-                            const SizedBox(height: 4),
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 8,
-                                vertical: 3,
-                              ),
-                              decoration: BoxDecoration(
-                                color: AppColors.carouselSlider,
-                                borderRadius: BorderRadius.circular(6),
-                              ),
-                              child: Text(
-                                banner['offer'],
-                                style:  TextStyle(
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.w800,
-                                  color: Colors.black87,
+                            child: Image.network(
+                              banner['image'],
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) {
+                                return  SizedBox.shrink();
+                              },
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(16.0),
+                          child: SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.52,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  banner['title'],
+                                  style:  TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
                                 ),
-                              ),
+                                SizedBox(height: 4),
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 8,
+                                    vertical: 3,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: AppColors.carouselSlider,
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                  child: Text(
+                                    banner['offer'],
+                                    style:TextStyle(
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w800,
+                                      color: Colors.black87,
+                                    ),
+                                  ),
+                                ),
+                                 SizedBox(height: 6),
+                                Text(
+                                  banner['description'],
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.white70,
+                                  ),
+                                ),
+                                 SizedBox(height: 10),
+                                Container(
+                                  padding:  EdgeInsets.symmetric(
+                                    horizontal: 12,
+                                    vertical: 6,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  child:  Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Text(
+                                        'Shop Now',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      SizedBox(width: 4),
+                                      Icon(
+                                        Icons.arrow_forward_ios_rounded,
+                                        size: 10,
+                                        color: Colors.black,
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
                             ),
-                            const SizedBox(height: 6),
-                            Text(
-                              banner['description'],
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style:  TextStyle(
-                                fontSize: 12,
-                                color: Colors.white70,
-                              ),
-                            ),
-                            const SizedBox(height: 10),
-                            SelectionButton(name: 'Shop Now', color: Colors.black,),
-                          ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 );
               },
             );
           }).toList(),
         ),
-        const SizedBox(height: 10),
+        SizedBox(height: 10),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            for (int i = 0;
-            i < _bannerList.length;
-            i++)
+            for (int i = 0; i < _bannerList.length; i++)
               Container(
                 height: 8,
                 width: _currentIndex == i ? 10 : 8,
@@ -161,5 +200,3 @@ class _HomeCarouselSliederState extends State<HomeCarouselSlieder> {
     );
   }
 }
-
-
